@@ -1,13 +1,12 @@
 "use client";
 
 import { Button, Combobox, Input, InputBase, Text, useCombobox } from "@mantine/core";
-import { IconSearch } from "@tabler/icons-react";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useEffect, useMemo, useState, type FC } from "react";
 
 import type { TCity } from "../types";
 
-import { formatCityName } from "../lib/format-city-name";
+import { getCityLabel } from "../lib/format-city-name";
 import { useCities } from "../hooks/use-cities";
 
 type TCitySelectProps = {
@@ -39,7 +38,7 @@ export const CitySelect: FC<TCitySelectProps> = ({ initialValue = null, onChange
 
     const options = cities.map((city) => (
       <Combobox.Option key={city.id} value={city.id}>
-        <Text>{formatCityName(city)}</Text>
+        <Text>{getCityLabel(city)}</Text>
       </Combobox.Option>
     ));
 
@@ -70,7 +69,7 @@ export const CitySelect: FC<TCitySelectProps> = ({ initialValue = null, onChange
           }}
         >
           {selectedCity ? (
-            <Text>{formatCityName(selectedCity)}</Text>
+            <Text>{getCityLabel(selectedCity)}</Text>
           ) : (
             <Input.Placeholder>Select city</Input.Placeholder>
           )}
@@ -83,8 +82,6 @@ export const CitySelect: FC<TCitySelectProps> = ({ initialValue = null, onChange
           type="search"
           placeholder="Search cities"
           value={searchValue}
-          leftSectionPointerEvents="none"
-          leftSection={<IconSearch className="h-5 w-5" />}
           onChange={(event) => setSearchValue(event.currentTarget.value)}
         />
 

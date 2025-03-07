@@ -1,7 +1,6 @@
 "use client";
 
 import { Button, Combobox, Input, InputBase, Text, useCombobox } from "@mantine/core";
-import { IconSearch } from "@tabler/icons-react";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useEffect, useMemo, useState, type FC } from "react";
 
@@ -71,7 +70,7 @@ export const TopicSelect: FC<TTopicSelectProps> = ({ initialValue = null, onChan
           {selectedTopic ? (
             <Text>{getTopicLabel(selectedTopic)}</Text>
           ) : (
-            <Input.Placeholder>Select topic</Input.Placeholder>
+            <Input.Placeholder>Choose topic</Input.Placeholder>
           )}
         </InputBase>
       </Combobox.Target>
@@ -82,8 +81,6 @@ export const TopicSelect: FC<TTopicSelectProps> = ({ initialValue = null, onChan
           type="search"
           placeholder="Search topics"
           value={searchValue}
-          leftSectionPointerEvents="none"
-          leftSection={<IconSearch className="h-5 w-5" />}
           onChange={(event) => setSearchValue(event.currentTarget.value)}
         />
 

@@ -7,6 +7,8 @@ import { CitySelect } from "@/modules/cities";
 import { TopicSelect } from "@/modules/topics";
 import type { TCity } from "@/modules/cities/types";
 import type { TTopic } from "@/modules/topics/types";
+import { getCityLabel } from "@/modules/cities/lib/format-city-name";
+import { getTopicLabel } from "@/modules/topics/lib/get-topic-label";
 
 enum EStep {
   City = 0,
@@ -22,8 +24,8 @@ export const Recommendations: FC<TRecommendationsProps> = ({ className }) => {
   const [activeStep, setActiveStep] = useState<EStep>(EStep.City);
   const [maxStep, setMaxStep] = useState<EStep>(activeStep);
 
-  const [selectedCity, setSelectedCity] = useState<TCity>();
-  const [selectedTopic, setSelectedTopic] = useState<TTopic>();
+  const [city, setCity] = useState<TCity>();
+  const [topic, setTopic] = useState<TTopic>();
 
   const handleChangeStep = useCallback((nextStep: number) => {
     setActiveStep(nextStep);
@@ -42,38 +44,26 @@ export const Recommendations: FC<TRecommendationsProps> = ({ className }) => {
   return (
     <Stepper active={activeStep} onStepClick={setActiveStep} className={className}>
       <Stepper.Step
-        label="Step 1"
-        description="Select city"
+        label="City"
+        description={city ? getCityLabel(city) : "Select city"}
         allowStepSelect={getAllowStepSelect(EStep.City)}
       >
         <div className="flex flex-col gap-6 py-12">
-          <CitySelect initialValue={selectedCity} onChange={setSelectedCity} />
-          <Button
-            fullWidth
-            size="md"
-            variant="filled"
-            disabled={!selectedCity}
-            onClick={handleClickNext}
-          >
+          <CitySelect initialValue={city} onChange={setCity} />
+          <Button fullWidth size="md" variant="filled" disabled={!city} onClick={handleClickNext}>
             Next
           </Button>
         </div>
       </Stepper.Step>
 
       <Stepper.Step
-        label="Step 2"
-        description="Choose topic"
+        label="Topic"
+        description={topic ? getTopicLabel(topic) : "Choose topic"}
         allowStepSelect={getAllowStepSelect(EStep.Topic)}
       >
         <div className="flex flex-col gap-6 py-12">
-          <TopicSelect initialValue={selectedTopic} onChange={setSelectedTopic} />
-          <Button
-            fullWidth
-            size="md"
-            variant="filled"
-            disabled={!selectedTopic}
-            onClick={handleClickNext}
-          >
+          <TopicSelect initialValue={topic} onChange={setTopic} />
+          <Button fullWidth size="md" variant="filled" disabled={!topic} onClick={handleClickNext}>
             Next
           </Button>
         </div>

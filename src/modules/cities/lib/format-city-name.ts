@@ -1,5 +1,5 @@
 import type { TCity } from "../types";
 
-export function formatCityName(city: TCity): string {
+export function getCityLabel(city: TCity): string {
   return `${city.city}, ${city.country}`;
 }
