@@ -1,0 +1,1 @@
+export { AiRecommendations } from "./recommendations";

@@ -1,14 +1,16 @@
 "use client";
 
-import { Button, Stepper, Text } from "@mantine/core";
+import { Button, Stepper } from "@mantine/core";
 import { useCallback, useState, type FC } from "react";
 
 import { CitySelect } from "@/modules/cities";
+import { getCityLabel } from "@/modules/cities/lib/format-city-name";
+import { getTopicLabel } from "@/modules/topics/lib/get-topic-label";
 import { TopicSelect } from "@/modules/topics";
 import type { TCity } from "@/modules/cities/types";
 import type { TTopic } from "@/modules/topics/types";
-import { getCityLabel } from "@/modules/cities/lib/format-city-name";
-import { getTopicLabel } from "@/modules/topics/lib/get-topic-label";
+
+import { RecommendationsChat } from "./recommendations-chat";
 
 enum EStep {
   City = 0,
@@ -16,11 +18,11 @@ enum EStep {
   Recommendations = 2,
 }
 
-type TRecommendationsProps = {
+type TAiRecommendationsProps = {
   className?: string;
 };
 
-export const Recommendations: FC<TRecommendationsProps> = ({ className }) => {
+export const AiRecommendations: FC<TAiRecommendationsProps> = ({ className }) => {
   const [activeStep, setActiveStep] = useState<EStep>(EStep.City);
   const [maxStep, setMaxStep] = useState<EStep>(activeStep);
 
@@ -64,7 +66,7 @@ export const Recommendations: FC<TRecommendationsProps> = ({ className }) => {
         <div className="flex flex-col gap-6 py-12">
           <TopicSelect initialValue={topic} onChange={setTopic} />
           <Button fullWidth size="md" variant="filled" disabled={!topic} onClick={handleClickNext}>
-            Next
+            Get Recommendations
           </Button>
         </div>
       </Stepper.Step>
@@ -75,7 +77,7 @@ export const Recommendations: FC<TRecommendationsProps> = ({ className }) => {
         allowStepSelect={getAllowStepSelect(EStep.Recommendations)}
       >
         <div className="flex flex-col gap-6 py-12">
-          <Text>AI Recommendations...</Text>
+          {city && topic ? <RecommendationsChat city={getCityLabel(city)} topic={topic} /> : null}
         </div>
       </Stepper.Step>
     </Stepper>

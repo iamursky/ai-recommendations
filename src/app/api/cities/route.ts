@@ -1,5 +1,6 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 
+import { ApiErrors } from "@/modules/app";
 import { getCities } from "@/modules/cities";
 
 export async function GET(request: NextRequest) {
@@ -13,9 +14,6 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Server Error:", error);
 
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500, statusText: "Internal Server Error" },
-    );
+    return NextResponse.json({ error: ApiErrors.ServerError }, { status: 500 });
   }
 }

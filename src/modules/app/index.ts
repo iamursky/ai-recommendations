@@ -1,1 +1,1 @@
-export { Recommendations } from "./containers/recommendations";
+export { ApiErrors } from "./constants/api-errors";
