@@ -23,7 +23,6 @@ npm run dev
 - [Next.js](https://nextjs.org/) as the React framework
 - [Tailwind CSS](https://tailwindcss.com/) for styling
 - [Mantine](https://mantine.dev/) UI component library
-- [Tabler Icons](https://tabler.io/icons) for icons
 - [TanStack Query](https://tanstack.com/query/latest) for data fetching
 
 ### Development Stack
