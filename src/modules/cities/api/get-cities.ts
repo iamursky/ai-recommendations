@@ -15,18 +15,24 @@ export type TGetCitiesResponse = {
   limit: number;
 };
 
+function searchCities(query: string): TCity[] {
+  query = query.trimStart().toLowerCase();
+
+  if (query.length === 0) return CITIES;
+
+  const startingWithQuery = CITIES.filter(({ lowerCaseCity }) => lowerCaseCity.startsWith(query));
+  const containingQuery = CITIES.filter(({ lowerCaseCity }) => lowerCaseCity.includes(query));
+  const uniqueCities = Array.from(new Set([...startingWithQuery, ...containingQuery]));
+
+  return uniqueCities;
+}
+
 export function getCities({
   query = "",
   offset = 0,
   limit = 10,
 }: TGetCitiesParams): TGetCitiesResponse {
-  query = query.trimStart().toLowerCase();
-
-  const cities =
-    query.length === 0
-      ? CITIES
-      : CITIES.filter(({ lowerCaseCity }) => lowerCaseCity.includes(query));
-
+  const cities = searchCities(query);
   const data = cities.slice(offset, offset + limit);
   const total = cities.length;
 
