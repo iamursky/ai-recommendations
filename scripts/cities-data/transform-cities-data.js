@@ -5,24 +5,39 @@ const { resolve } = require("path");
 const { writeFile } = require("fs");
 
 // Source: https://github.com/dr5hn/countries-states-cities-database
-const inputData = require("./input.json");
+const citiesData = require("./cities.json");
+
+// Source: https://raw.githubusercontent.com/lmfmaier/cities-json
+const pupulationData = require("./population.json");
 
 const outputData = [];
 
-inputData.forEach((country) => {
+citiesData.forEach((country) => {
   const cities = country.cities.map((city) => city.name);
   const uniqueCities = Array.from(new Set(cities));
 
   if (uniqueCities.length === 0) return;
 
   uniqueCities.forEach((cityName) => {
-    outputData.push({
-      id: randomUUID(),
-      city: cityName,
-      country: country.name,
-      lowerCaseCity: cityName.toLowerCase(),
-      lowerCaseCountry: country.name.toLowerCase(),
-    });
+    console.log(`${country.name}, ${cityName}`);
+
+    const cityNameLowerCase = cityName.toLowerCase();
+
+    const cityPopulationData = pupulationData.find(
+      (city) => city.name.toLowerCase() === cityNameLowerCase,
+    );
+
+    const cityPopulation = cityPopulationData ? parseInt(cityPopulationData.pop) : null;
+
+    if (cityPopulationData) {
+      outputData.push({
+        cityName,
+        cityNameLowerCase,
+        cityPopulation,
+        id: randomUUID(),
+        countryName: country.name,
+      });
+    }
   });
 }, {});
 

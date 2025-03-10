@@ -20,11 +20,19 @@ function searchCities(query: string): TCity[] {
 
   if (query.length === 0) return CITIES;
 
-  const startingWithQuery = CITIES.filter(({ lowerCaseCity }) => lowerCaseCity.startsWith(query));
-  const containingQuery = CITIES.filter(({ lowerCaseCity }) => lowerCaseCity.includes(query));
+  const startingWithQuery = CITIES.filter(({ cityNameLowerCase }) =>
+    cityNameLowerCase.startsWith(query),
+  );
+
+  const containingQuery = CITIES.filter(({ cityNameLowerCase }) =>
+    cityNameLowerCase.includes(query),
+  );
+
   const uniqueCities = Array.from(new Set([...startingWithQuery, ...containingQuery]));
 
-  return uniqueCities;
+  const sortedByPopulationDesc = uniqueCities.sort((a, b) => b.cityPopulation - a.cityPopulation);
+
+  return sortedByPopulationDesc;
 }
 
 export function getCities({

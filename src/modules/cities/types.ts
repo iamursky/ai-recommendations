@@ -1,7 +1,7 @@
 export type TCity = {
   id: string;
-  city: string;
-  country: string;
-  lowerCaseCity: string;
-  lowerCaseCountry: string;
+  cityName: string;
+  cityNameLowerCase: string;
+  cityPopulation: number;
+  countryName: string;
 };

@@ -46,3 +46,4 @@ npm run dev
 ## References
 
 - Cities data from [dr5hn/countries-states-cities-database](https://github.com/dr5hn/countries-states-cities-database)
+- Cities population data from [lmfmaier/cities-json](https://raw.githubusercontent.com/lmfmaier/cities-json)
