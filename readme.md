@@ -1,4 +1,4 @@
-# AI Recommendations Test Assignment
+# AI Recommendations
 
 ## Getting Started
 

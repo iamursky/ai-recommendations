@@ -9,8 +9,8 @@ import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "AI Recommendations Test Assignment",
-  description: "AI Recommendations Test Assignment",
+  title: "AI Recommendations",
+  description: "AI Recommendations",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
