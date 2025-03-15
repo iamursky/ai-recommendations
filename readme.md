@@ -1,4 +1,4 @@
-# Cori Test Assignment
+# AI Recommendations Test Assignment
 
 ## Getting Started
 
